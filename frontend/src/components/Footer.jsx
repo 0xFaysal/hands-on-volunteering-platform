@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
     return (
-        <footer>
+        <footer className='mt-16'>
             <section className='bg-dark text-light px-16 p-8 w-[96%] mx-auto rounded-2xl'>
                 <div className='flex justify-between items-center'>
                     <div className='flex flex-col justify-center items-center grow'>
