@@ -1,7 +1,55 @@
 import React from "react";
+import {Link} from "react-router";
 
 function Login() {
-    return <div>Login</div>;
+    return (
+        <section className='w-full h-screen  flex items-center justify-center bg-gradient-to-bl from-[#f0f4ff] to-[#e0e7ff]'>
+            <div className='flex items-center justify-center w-[80%] h-[80%]  rounded-2xl shadow-lg overflow-hidden bg-white/80'>
+                <div className='img-bg-1 w-1/2 h-full relative'>
+                    <Link to='/'>
+                        <div className='flex justify-start items-center absolute bottom-4 left-4 bg-black/10 '>
+                            <img
+                                src='./logo.png'
+                                alt='HandsOn Logo'
+                                className='h-16 w-16'
+                            />
+                            <h1 className='text-3xl font-bold ml-2 text-white'>
+                                HandsOn
+                            </h1>
+                        </div>
+                    </Link>
+                </div>
+                <div className='w-1/2 px-18 space-y-6 py-18 self-start'>
+                    <h2 className='text-2xl font-bold my-4'>
+                        Welcome Back!
+                        <br /> Join us again to make a difference.
+                    </h2>
+                    <h1 className='text-4xl font-bold mb-8'>Login</h1>
+                    <form className='flex flex-col gap-4'>
+                        <input
+                            type='text'
+                            placeholder='Email'
+                            required
+                            className='border border-gray-300 p-2 rounded '
+                        />
+                        <input
+                            type='password'
+                            placeholder='Password'
+                            required
+                            className='border border-gray-300 p-2 rounded'
+                        />
+                        <button className='btn my-8'>Login</button>
+                    </form>
+                    <p className='mt-4'>
+                        Don't have an account?{" "}
+                        <Link to='/register' className='text-blue-500'>
+                            Register here
+                        </Link>
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 export default Login;

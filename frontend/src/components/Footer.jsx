@@ -49,6 +49,7 @@ function Footer() {
                                         href='mailto:faysalfahim3@gmail.com'
                                         className='text-green-300 hover:underline'
                                     >
+                                        {" "}
                                         faysalfahim3@gmail.com
                                     </a>
                                 </li>

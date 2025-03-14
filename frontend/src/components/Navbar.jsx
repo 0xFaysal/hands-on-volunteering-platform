@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {Link} from "react-router";
 
 function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -41,7 +42,9 @@ function Navbar() {
                     <li>Privacy Policy</li>
                 </ul>
 
-                <button className='btn'>Join Now</button>
+                <Link to='/login'>
+                    <button className='btn'>Join Now</button>
+                </Link>
             </div>
         </nav>
     );

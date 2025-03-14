@@ -20,6 +20,13 @@
         background-position: center 80%;
         background-repeat: no-repeat;
     }
+
+    .img-bg-1 {
+        background-image: url("./volunteer1.jpg");
+        background-size: cover;
+        background-position: center 80%;
+        background-repeat: no-repeat;
+    }
 }
 
 @layer {
