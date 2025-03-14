@@ -1,7 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap");
+
 @import "tailwindcss";
 
 @theme {
-    --color-primary: ##00bf63;
+    --color-primary: #00bf63;
     --color-light: #f5f5f5;
     --color-dark: #19282f;
+}
+
+@layer components {
+    .btn {
+        @apply bg-primary text-white font-bold py-2 px-8 rounded-lg;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-500 text-white font-bold py-2 px-4 rounded;
+    }
+}
+
+@layer {
+    html {
+        font-size: 16px;
+        font-family: "Inter Tight", "Roboto", sans-serif;
+        color: var(--color-dark);
+    }
+
+    body {
+        background-color: var(--color-light);
+    }
+
+    a {
+        text-decoration: none;
+    }
 }
