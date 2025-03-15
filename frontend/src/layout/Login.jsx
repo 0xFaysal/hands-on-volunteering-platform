@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router";
+import {FaAngleDoubleLeft} from "react-icons/fa";
 
 function Login() {
     return (
@@ -20,7 +21,13 @@ function Login() {
                     </Link>
                 </div>
                 <div className='w-1/2 px-18 space-y-6 py-18 self-start'>
-                    <h2 className='text-2xl font-bold my-4'>
+                    <p className='l font-bold text-gray-700'>
+                        <Link to='/' className='flex items-cente gap-1 '>
+                            <FaAngleDoubleLeft className='text-xl text-primary font-black' />{" "}
+                            Back to Home
+                        </Link>
+                    </p>
+                    <h2 className='text-xl font-semibold  my-4'>
                         Welcome Back!
                         <br /> Join us again to make a difference.
                     </h2>
@@ -38,11 +45,13 @@ function Login() {
                             required
                             className='border border-gray-300 p-2 rounded'
                         />
-                        <button className='btn my-8'>Login</button>
+                        <button className='btn my-8 hover:bg-green-400 transition-all duration-300 ease-in-out'>
+                            Login
+                        </button>
                     </form>
-                    <p className='mt-4'>
+                    <p className='mt-4 text-center'>
                         Don't have an account?{" "}
-                        <Link to='/register' className='text-blue-500'>
+                        <Link to='/register' className='text-green-700'>
                             Register here
                         </Link>
                     </p>

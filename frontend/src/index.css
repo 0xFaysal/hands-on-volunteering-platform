@@ -27,6 +27,14 @@
         background-position: center 80%;
         background-repeat: no-repeat;
     }
+    .img-bg-2 {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            url("./volunteer2.jpg");
+        /* background-image: ; */
+        background-size: cover;
+        background-position: center 80%;
+        background-repeat: no-repeat;
+    }
 }
 
 @layer {
