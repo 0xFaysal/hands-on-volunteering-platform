@@ -4,15 +4,15 @@ import {FaTrophy} from "react-icons/fa";
 import {AuthContext} from "../provider/AuthProvider";
 
 function Home() {
-    const data = useContext(AuthContext);
-    console.log(data);
+    const {user} = useContext(AuthContext);
+
     return (
         <section className='mt-24 w-full'>
             <Hero />
-            {data.user && (
+            {user && (
                 <div className='flex justify-center items-center mt-8'>
                     <h1 className='text-3xl font-bold text-gray-700'>
-                        Welcome back, {data.user}!
+                        Welcome back, {user.name}!
                     </h1>
                 </div>
             )}
