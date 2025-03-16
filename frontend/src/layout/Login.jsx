@@ -1,8 +1,31 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Link} from "react-router";
 import {FaAngleDoubleLeft} from "react-icons/fa";
+import {AuthContext} from "../provider/AuthProvider";
+import {toastError, toastSuccess} from "../components/toast";
 
 function Login() {
+    const {login} = useContext(AuthContext);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        console.log(form[0].value, form[1].value);
+        const email = form[0].value;
+        const password = form[1].value;
+        try {
+            const res = await login(email, password);
+            console.log(res);
+            if (res.success) {
+                toastSuccess("Login successful");
+            } else {
+                toastError(res.error);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+        form.reset();
+    };
+
     return (
         <section className='w-full h-screen  flex items-center justify-center bg-gradient-to-bl from-[#f0f4ff] to-[#e0e7ff]'>
             <div className='flex items-center justify-center w-[80%] h-[80%]  rounded-2xl shadow-lg overflow-hidden bg-white/80'>
@@ -32,7 +55,10 @@ function Login() {
                         <br /> Join us again to make a difference.
                     </h2>
                     <h1 className='text-4xl font-bold mb-8'>Login</h1>
-                    <form className='flex flex-col gap-4'>
+                    <form
+                        className='flex flex-col gap-4'
+                        onSubmit={handleLogin}
+                    >
                         <input
                             type='text'
                             placeholder='Email'

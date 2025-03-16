@@ -15,6 +15,22 @@ const User = mongoose.Schema(
             type: String,
             required: true,
         },
+        skills: {
+            type: [String],
+            default: [],
+        },
+        supportedCauses: {
+            type: [String],
+            default: [],
+        },
+        photo: {
+            type: String,
+            default: "",
+        },
+        isLogin: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true,

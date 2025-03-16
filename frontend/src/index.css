@@ -35,6 +35,9 @@
         background-position: center 80%;
         background-repeat: no-repeat;
     }
+    .active {
+        @apply border-b-4  border-primary transition-[border] duration-500;
+    }
 }
 
 @layer {

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const {connectionDb} = require("./database/connectionDB");
 const loginHandler = require("./authentication/Login");
 const registerHandler = require("./authentication/Register");
+const checkAuthHandler = require("./authentication/checkAuth");
 require("dotenv").config();
 
 const app = express();
@@ -16,8 +17,8 @@ app.use(
     cors({
         origin: ["http://localhost:5173"],
         credentials: true,
-        sameSite: "none",
-        secure: false,
+        sameSite: "lax", // Changed from "none"
+        secure: process.env.NODE_ENV === "production", // Only true in production
     })
 );
 app.use(express.json());
@@ -25,6 +26,11 @@ app.use(cookieParser());
 
 //MongoDB connection
 connectionDb();
+
+app.use((req, res, next) => {
+    console.log(`${new Date()}: ${req.method} ${req.url}`);
+    next(); // Pass control to next middleware
+});
 
 // error handling middleware
 app.use((err, req, res, next) => {
@@ -44,9 +50,11 @@ app.get("/", (req, res) => {
     res.send("Hello from HandsOn! Server");
 });
 
-app.post("/api/register", registerHandler);
+app.post("/api/auth/register", registerHandler);
 
-app.post("/api/login", loginHandler);
+app.post("/api/auth/login", loginHandler);
+
+app.get("/api/auth/check", checkAuthHandler);
 
 // General error handler for unhandled errors
 app.use((err, req, res, next) => {

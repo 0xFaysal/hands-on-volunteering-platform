@@ -1,7 +1,11 @@
-import React, {useState, useEffect} from "react";
-import {Link} from "react-router";
+import React, {useState, useEffect, useContext} from "react";
+import {Link, NavLink} from "react-router";
+import {AuthContext} from "./../provider/AuthProvider";
+import {CiMenuFries} from "react-icons/ci";
 
 function Navbar() {
+    const {user} = useContext(AuthContext);
+
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -35,16 +39,55 @@ function Navbar() {
                     <img src='./logo.png' alt='Logo' className='h-12 w-12' />
                     <h1 className='text-2xl font-bold'>HandsOn</h1>
                 </div>
-                <ul className='flex gap-8'>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact Us</li>
-                    <li>Privacy Policy</li>
-                </ul>
-
-                <Link to='/login'>
-                    <button className='btn'>Join Now</button>
-                </Link>
+                <div className='hidden lg:block'>
+                    <ul
+                        className='flex gap-8 *:px-4
+                *:py-2 '
+                    >
+                        <li className='text-lg font-semibold'>
+                            <NavLink to='/'>Home</NavLink>
+                        </li>
+                        <li className='text-lg font-semibold'>
+                            <NavLink to='/events'>Events</NavLink>
+                        </li>
+                        <li className='text-lg font-semibold'>
+                            <NavLink to='/posts'>Community Post</NavLink>
+                        </li>
+                        <li className='text-lg font-semibold'>
+                            <NavLink to='/leaderboard'>Leaderboard</NavLink>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    {user ? (
+                        <div className='hidden lg:flex gap-4 '>
+                            <Link
+                                to='/profile'
+                                className='bg-green-600 text-white font-semibold px-4 py-2 rounded-lg'
+                            >
+                                Profile
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className='hidden lg:flex gap-4'>
+                            <Link
+                                to='/login'
+                                className='bg-blue-600 text-white px-4 py-2 rounded-lg'
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                to='/register'
+                                className='bg-green-600 text-white px-4 py-2 rounded-lg'
+                            >
+                                Register
+                            </Link>
+                        </div>
+                    )}
+                </div>
+                <div className='lg:hidden'>
+                    <CiMenuFries className='h-8 w-8 text-gray-800' />
+                </div>
             </div>
         </nav>
     );
