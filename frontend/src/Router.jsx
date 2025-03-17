@@ -14,13 +14,15 @@ function Router() {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route element={<AddSkill />}>
+                    <Route element={<App />}>
                         <Route index element={<Home />} />
                         <Route path='/events' element={<Events />} />
                         <Route path='/posts' element={<Posts />} />
                         <Route path='/leaderboard' element={<Leaderboard />} />
                     </Route>
                     <Route path='/login' element={<Login />} />
+                    <Route path='/add-skill' element={<AddSkill />} />
+
                     <Route path='/register' element={<Register />} />
                 </Routes>
             </BrowserRouter>

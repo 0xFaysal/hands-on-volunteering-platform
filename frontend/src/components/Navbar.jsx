@@ -35,10 +35,16 @@ function Navbar() {
                         : "bg-transparent text-black py-4 mt-2"
                 }`}
             >
-                <div className='flex items-center gap-2'>
-                    <img src='./logo.png' alt='Logo' className='h-12 w-12' />
-                    <h1 className='text-2xl font-bold'>HandsOn</h1>
-                </div>
+                <Link to='/' className='flex items-center'>
+                    <div className='flex items-center gap-2'>
+                        <img
+                            src='./logo.png'
+                            alt='Logo'
+                            className='h-12 w-12'
+                        />
+                        <h1 className='text-2xl font-bold'>HandsOn</h1>
+                    </div>
+                </Link>
                 <div className='hidden lg:block'>
                     <ul
                         className='flex gap-8 *:px-4
