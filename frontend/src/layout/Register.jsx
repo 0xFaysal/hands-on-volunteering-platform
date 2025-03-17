@@ -28,7 +28,7 @@ function Register() {
                 if (res.success) {
                     toastSuccess("Registration successful");
                     setTimeout(() => {
-                        redirect("/");
+                        redirect("/add-skill");
                     }, 1000);
                 } else {
                     toastError(res.error);

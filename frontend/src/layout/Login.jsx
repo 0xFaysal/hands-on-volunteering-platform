@@ -1,11 +1,13 @@
 import React, {useContext} from "react";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import {FaAngleDoubleLeft} from "react-icons/fa";
 import {AuthContext} from "../provider/AuthProvider";
 import {toastError, toastSuccess} from "../components/toast";
 
 function Login() {
     const {login} = useContext(AuthContext);
+    const redirect = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -17,6 +19,10 @@ function Login() {
             console.log(res);
             if (res.success) {
                 toastSuccess("Login successful");
+                // Redirect to home page
+                setTimeout(() => {
+                    redirect("/");
+                }, 2000);
             } else {
                 toastError(res.error);
             }
