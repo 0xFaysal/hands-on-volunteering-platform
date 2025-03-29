@@ -57,10 +57,13 @@ function Navbar() {
                             <NavLink to='/events'>Events</NavLink>
                         </li>
                         <li className='text-lg font-semibold'>
-                            <NavLink to='/posts'>Community Post</NavLink>
+                            <NavLink to='/request_aid'>Request Aid</NavLink>
                         </li>
                         <li className='text-lg font-semibold'>
                             <NavLink to='/leaderboard'>Leaderboard</NavLink>
+                        </li>
+                        <li className='text-lg font-semibold'>
+                            <NavLink to='/communities'>Communities</NavLink>
                         </li>
                     </ul>
                 </div>
@@ -78,7 +81,7 @@ function Navbar() {
                         <div className='hidden lg:flex gap-4'>
                             <Link
                                 to='/login'
-                                className='bg-blue-600 text-white px-4 py-2 rounded-lg'
+                                className='border-green-600 border-2 text-green-600 px-4 py-2 rounded-lg'
                             >
                                 Login
                             </Link>
