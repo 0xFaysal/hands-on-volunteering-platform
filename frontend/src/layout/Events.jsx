@@ -8,13 +8,13 @@ function Events() {
                 <input
                     type='text'
                     placeholder='Search for events...'
-                    className='w-[60%] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    className='w-[60%] p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                 />
-                <button className='ml-4 p-2 px-4 border-2 border-green-400 text-green-700 rounded-lg hover:bg-blue-700'>
+                <button className='ml-4 p-2 px-4 border-2 border-green-400 text-green-700 rounded-lg hover:bg-green-100'>
                     Search
                 </button>
 
-                <select className='ml-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'>
+                <select className='ml-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'>
                     <option value='all'>All</option>
                     <option value='upcoming'>Upcoming</option>
                     <option value='past'>Past</option>
