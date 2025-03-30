@@ -16,15 +16,16 @@ function AuthProvider({children}) {
     });
 
     // Add interceptor to handle 401 errors silently
-    axiosInstance.interceptors.response.use(
-        (response) => response,
-        (error) => {
-            if (error?.status === 401) {
-                return Promise.resolve({data: {user: null}});
-            }
-            return Promise.reject(error);
-        }
-    );
+    // axiosInstance.interceptors.response.use(
+    //     (response) => response,
+    //     (error) => {
+    //         console.error("Error in axios interceptor:", error);
+    //         if (error?.status === 401) {
+    //             return Promise.resolve({data: {user: null}});
+    //         }
+    //         return Promise.reject(error);
+    //     }
+    // );
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -77,6 +78,7 @@ function AuthProvider({children}) {
                 password,
             });
             setUser(res.data.user);
+            console.log(res);
             return {success: true};
         } catch (error) {
             return {
