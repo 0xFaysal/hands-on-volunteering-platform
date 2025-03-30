@@ -19,30 +19,31 @@ function Footer() {
                     </div>
 
                     <div className='flex gap-16 grow justify-center items-start'>
-                        <div>
+                        <div className='flex flex-col gap-2'>
                             <h3 className='text-2xl font-semibold'>Menu</h3>
-                            <ul>
+                            <ul className='flex flex-col gap-2'>
                                 <li>Home</li>
                                 <li>About</li>
                                 <li>Contact Us</li>
                                 <li>Privacy Policy</li>
                             </ul>
                         </div>
-                        <div>
+                        <div className='flex flex-col gap-2'>
                             <h3 className='text-2xl font-semibold'>
                                 Follow Us
                             </h3>
-                            <ul>
+                            <ul className='flex flex-col gap-2'>
+                                <li>LinkedIn</li>
                                 <li>Facebook</li>
                                 <li>Twitter</li>
                                 <li>Instagram</li>
                             </ul>
                         </div>
-                        <div>
+                        <div className='flex flex-col gap-2'>
                             <h3 className='text-2xl font-semibold'>
                                 Contact Us
                             </h3>
-                            <ul>
+                            <ul className='flex flex-col gap-2'>
                                 <li>
                                     Email:
                                     <a
@@ -59,7 +60,7 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr className='my-4' />
                 <div className='flex items-center justify-between gap-4 mt-4'>
                     <p className='text-center text-sm'>
                         &copy; {new Date().getFullYear()} HandsOn. All rights
