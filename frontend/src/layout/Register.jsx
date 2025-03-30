@@ -2,7 +2,7 @@ import {useContext} from "react";
 import {Link, useNavigate} from "react-router";
 import {FaAngleDoubleLeft} from "react-icons/fa";
 import {AuthContext} from "../provider/AuthProvider";
-import {toastError, toastSuccess, toastWarning} from "../components/toast";
+import {toastError, toastWarning} from "../components/toast";
 
 function Register() {
     const {register} = useContext(AuthContext);
@@ -26,7 +26,6 @@ function Register() {
             .then((res) => {
                 console.log(res);
                 if (res.success) {
-                    toastSuccess("Registration successful");
                     setTimeout(() => {
                         redirect("/add-skill");
                     }, 1000);

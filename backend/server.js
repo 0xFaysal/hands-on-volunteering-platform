@@ -1,11 +1,17 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const fs = require("fs").promises;
+const sharp = require("sharp");
 const {connectionDb} = require("./database/connectionDB");
 const loginHandler = require("./authentication/Login");
 const registerHandler = require("./authentication/Register");
 const checkAuthHandler = require("./authentication/checkAuth");
+const UploadInfo = require("./authentication/uploadInfo");
+const verifyToken = require("./middleware/verifyToken");
 require("dotenv").config();
 
 const app = express();
@@ -23,6 +29,13 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+
+// Add this line to serve static files from the upload directory
+app.use("/upload", express.static(path.join(process.cwd(), "upload")));
+
+// Multer setup
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
 
 //MongoDB connection
 connectionDb();
@@ -55,6 +68,64 @@ app.post("/api/auth/register", registerHandler);
 app.post("/api/auth/login", loginHandler);
 
 app.get("/api/auth/check", checkAuthHandler);
+// app.post("/api/auth/upload_info", upload.single("photo"), uploadInfo);
+
+app.post(
+    "/api/auth/upload",
+    verifyToken,
+    upload.single("photo"),
+    async (req, res) => {
+        try {
+            const {skills, cause} = req.body;
+            console.log("User ID:", req.user.id);
+            console.log("Request Body:", req.body);
+            console.log("Skills:", skills);
+            console.log("Cause:", cause);
+            console.log("File:", req.file);
+            const photo = req.file;
+            const parsedSkills = JSON.parse(skills);
+
+            // Create upload directory if it doesn't exist
+            const uploadDir = path.join(process.cwd(), "upload", "user");
+            await fs.mkdir(uploadDir, {recursive: true});
+
+            let profilePicturePath;
+            if (photo) {
+                const fileBuffer = photo.buffer;
+                const optimizedFileName =
+                    Date.now() * Math.round(Math.random() * 1000) +
+                    "-" +
+                    photo.originalname;
+                const optimizedFilePath = path.join(
+                    "upload/user",
+                    optimizedFileName
+                );
+
+                await sharp(fileBuffer)
+                    .jpeg({quality: 50})
+                    .toFile(path.join(process.cwd(), optimizedFilePath));
+
+                profilePicturePath = optimizedFilePath;
+            }
+            console.log("Profile picture path:", profilePicturePath);
+            console.log("Parsed skills:", parsedSkills);
+            console.log("Cause:", cause);
+
+            await UploadInfo(req, res, {
+                photo: profilePicturePath,
+                skills: parsedSkills,
+                cause,
+            });
+        } catch (error) {
+            console.error("Upload error:", error);
+            res.status(500).json({
+                success: false,
+                message: "Upload failed",
+                error: error.message,
+            });
+        }
+    }
+);
 
 // General error handler for unhandled errors
 app.use((err, req, res, next) => {

@@ -19,11 +19,11 @@ const User = mongoose.Schema(
             type: [String],
             default: [],
         },
-        supportedCauses: {
-            type: [String],
-            default: [],
+        supportedCause: {
+            type: String,
+            default: "",
         },
-        photo: {
+        profilePicture: {
             type: String,
             default: "",
         },

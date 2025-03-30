@@ -1,14 +1,57 @@
-import React, {useState, useRef} from "react";
-("react");
+import React, {useState, useRef, useContext} from "react";
+import {AuthContext} from "../provider/AuthProvider";
 import img from "/skill.svg";
 import {TbPlayerTrackNext} from "react-icons/tb";
-import {toastWarning} from "../components/toast";
+import {toastSuccess, toastWarning} from "../components/toast";
+import {useNavigate} from "react-router";
 
 function AddSkill() {
+    const {axiosInstance} = useContext(AuthContext);
+    const redirect = useNavigate();
+
     const [skills, setSkills] = useState(["LeaderShip", "Teamwork"]);
     const [newSkill, setNewSkill] = useState("");
+    const [step, setStep] = useState(1);
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    const [step, setStep] = useState(1); // Add this line
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+
+        if (selectedImage) {
+            formData.append("photo", selectedImage);
+        }
+
+        formData.append("skills", JSON.stringify(skills));
+        formData.append("cause", event.target.cause.value);
+
+        try {
+            const response = await axiosInstance.post(
+                "/auth/upload",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            if (response.data.success) {
+                // Handle success (e.g., redirect or show message)
+                toastSuccess("Registration successful");
+                setTimeout(() => {
+                    redirect("/");
+                }, 2000);
+                // console.log("Upload successful");
+            }
+        } catch (error) {
+            console.error("Upload failed:", error);
+            toastWarning("Upload failed");
+        }
+    };
+
+    const handleImageSelect = (file) => {
+        setSelectedImage(file);
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -28,7 +71,10 @@ function AddSkill() {
     return (
         <section className='w-full h-screen flex justify-center items-center bg-gray-100'>
             {step === 1 ? (
-                <ProfilePictureUpload onNext={() => setStep(2)} />
+                <ProfilePictureUpload
+                    onNext={() => setStep(2)}
+                    onImageSelect={handleImageSelect}
+                />
             ) : (
                 <AddSkillSection
                     skills={skills}
@@ -36,7 +82,8 @@ function AddSkill() {
                     newSkill={newSkill}
                     setNewSkill={setNewSkill}
                     handleKeyDown={handleKeyDown}
-                    onBack={() => setStep(1)} // Add this line to handle back step
+                    onBack={() => setStep(1)}
+                    handleSubmit={handleSubmit}
                 />
             )}
         </section>
@@ -51,6 +98,7 @@ function AddSkillSection({
     setNewSkill,
     handleKeyDown,
     onBack,
+    handleSubmit,
 }) {
     return (
         <div className='flex  items-center justify-center bg-white shadow-lg rounded-lg p-8 w-[90%] h-[90%]'>
@@ -58,7 +106,7 @@ function AddSkillSection({
                 <img src={img} alt='skill illustration' />
             </div>
             <div className='w-1/2 h-full flex flex-col justify-center items-center'>
-                <form action='/api/skill' method='POST' className='w-full '>
+                <form onSubmit={handleSubmit} className='w-full '>
                     <div>
                         <h1 className='text-3xl font-bold mb-4'>
                             Add Your Skills
@@ -144,7 +192,7 @@ function AddSkillSection({
 }
 
 // add profile picture upload functionality
-function ProfilePictureUpload({onNext}) {
+function ProfilePictureUpload({onNext, onImageSelect}) {
     const [selectedImage, setSelectedImage] = useState(
         "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg"
     );
@@ -164,6 +212,7 @@ function ProfilePictureUpload({onNext}) {
             const imageUrl = URL.createObjectURL(file);
             setSelectedImage(imageUrl);
             setFileName(file.name);
+            onImageSelect(file); // Add this line to pass the file up
         }
     };
 
