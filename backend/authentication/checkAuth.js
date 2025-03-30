@@ -11,6 +11,7 @@ const checkAuthHandler = async (req, res) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await UserModel.findById(decoded.id).select("-password");
+        console.log("User", user);
 
         if (!user) {
             return res.status(404).json({message: "User not found"});
@@ -18,13 +19,14 @@ const checkAuthHandler = async (req, res) => {
 
         res.status(200).json({
             message: "User authenticated successfully",
+
             user: {
                 id: user._id,
                 name: user.name,
                 email: user.email,
                 skills: user.skills,
-                supportedCauses: user.supportedCauses,
-                photo: user.photo,
+                supportedCauses: user.supportedCause,
+                photo: user.profilePicture,
             },
         });
     } catch (error) {

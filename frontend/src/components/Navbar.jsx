@@ -4,8 +4,8 @@ import {AuthContext} from "./../provider/AuthProvider";
 import {CiMenuFries} from "react-icons/ci";
 
 function Navbar() {
-    const {user} = useContext(AuthContext);
-
+    const {user, serverURL} = useContext(AuthContext);
+    console.log("User in Navbar", user);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -59,11 +59,12 @@ function Navbar() {
                         <li className='text-lg font-semibold'>
                             <NavLink to='/request_aid'>Request Aid</NavLink>
                         </li>
-                        <li className='text-lg font-semibold'>
-                            <NavLink to='/leaderboard'>Leaderboard</NavLink>
-                        </li>
+
                         <li className='text-lg font-semibold'>
                             <NavLink to='/communities'>Communities</NavLink>
+                        </li>
+                        <li className='text-lg font-semibold'>
+                            <NavLink to='/leaderboard'>Leaderboard</NavLink>
                         </li>
                     </ul>
                 </div>
@@ -72,9 +73,14 @@ function Navbar() {
                         <div className='hidden lg:flex gap-4 '>
                             <Link
                                 to='/profile'
-                                className='bg-green-600 text-white font-semibold px-4 py-2 rounded-lg'
+                                className='bg-green-600 p-1 rounded-full'
                             >
-                                Profile
+                                {console.log(serverURL + user.photo)}
+                                <img
+                                    className='h-12 w-12 rounded-full'
+                                    src={serverURL + user.photo}
+                                    alt={user.name}
+                                />
                             </Link>
                         </div>
                     ) : (

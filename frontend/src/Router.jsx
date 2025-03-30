@@ -47,6 +47,7 @@ import Events from "./layout/Events";
 import Leaderboard from "./layout/Leaderboard";
 import AddSkill from "./layout/AddSkill";
 import Communities from "./layout/Communities";
+import Profile from "./layout/Profile";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
                 <Route path='/request_aid' element={<Posts />} />
                 <Route path='/leaderboard' element={<Leaderboard />} />
                 <Route path='/communities' element={<Communities />} />
+                <Route path='/profile' element={<Profile />} />
             </Route>
             <Route path='/login' element={<Login />} />
             <Route path='/add-skill' element={<AddSkill />} />

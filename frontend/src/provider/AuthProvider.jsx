@@ -6,6 +6,7 @@ export const AuthContext = createContext(null);
 function AuthProvider({children}) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const serverURL = "http://localhost:5000/";
 
     const axiosInstance = axios.create({
         baseURL: "http://localhost:5000/api",
@@ -33,6 +34,8 @@ function AuthProvider({children}) {
                 const res = await axiosInstance.get("/auth/check");
                 if (res.data.user) {
                     setUser(res.data.user);
+                    // console.log("User authenticated:", res.data.user);
+                    // console.log("User data:", user);
                 }
             } catch (error) {
                 console.error(
@@ -93,6 +96,7 @@ function AuthProvider({children}) {
         axiosInstance,
         login,
         register,
+        serverURL,
     };
 
     if (loading) {
