@@ -39,6 +39,16 @@ function Leaderboard() {
                 <h1 className='text-3xl font-semibold text-gray-800 mb-4'>
                     Leaderboard
                 </h1>
+                <div className='flex items-center gap-2'>
+                    <span className=' font-semibold text-gray-800'>
+                        Sort by:
+                    </span>
+                    <select className='ml-2 border border-gray-200 rounded-md p-2 px-4 bg-white focus:outline-none focus:ring-1 focus:ring-green-100'>
+                        <option value='points'>Points</option>
+                        <option value='time'>Time</option>
+                        <option value='Rank'>Rank</option>
+                    </select>
+                </div>
             </div>
             <div className='flex flex-col items-center justify-center w-full mt-6'>
                 <div className='flex items-center justify-between mb-8 w-[90%] mx-auto px-4 py-2 bg-gray-100 rounded-lg shadow-md'>
@@ -91,7 +101,7 @@ function Leaderboard() {
                                             : "text-gray-800 text-lg"
                                     }`}
                                 >
-                                    {index + 1}
+                                    #{index + 1}
                                 </span>
                                 {index === 0 && (
                                     <img
