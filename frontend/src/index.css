@@ -35,6 +35,17 @@
         background-position: center 80%;
         background-repeat: no-repeat;
     }
+    .img-home-bg {
+        background-image: linear-gradient(
+                rgba(0, 0, 0, 0.3),
+                rgba(0, 0, 0, 0.3)
+            ),
+            url("./home-bg.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     .active {
         @apply border-b-4  border-primary transition-[border] duration-500;
     }
